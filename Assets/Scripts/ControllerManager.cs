@@ -2,7 +2,7 @@ using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Controller : MonoBehaviour
+public class ControllerManager : MonoBehaviour
 {
     [SerializeField] PlayerInput _defaultPlayer;
     [SerializeField] CinemachineCamera _camera;

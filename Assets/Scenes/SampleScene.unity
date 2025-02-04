@@ -938,7 +938,7 @@ GameObject:
   - component: {fileID: 1565779911}
   - component: {fileID: 1565779910}
   - component: {fileID: 1565779916}
-  - component: {fileID: 1565779914}
+  - component: {fileID: 1565779917}
   - component: {fileID: 1565779915}
   m_Layer: 0
   m_Name: Mount
@@ -1040,76 +1040,6 @@ Transform:
   - {fileID: 1613465991}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!114 &1565779914
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1565779909}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbf40c1bae497e447a9af78822b73a0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 6
-  gravity: 9.8
-  groundedAngle: 45
-  _onMountEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1613465990}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 907063629}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  _onDismountEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1613465990}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 907063629}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-  _fakePlayer: {fileID: 1613465990}
 --- !u!114 &1565779915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1243,6 +1173,28 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &1565779917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1565779909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0f0d9228ec443d4ab8c59f5f767a7ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 6
+  gravity: 9.8
+  groundedAngle: 45
+  _onMountEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  _onDismountEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  _fakePlayer: {fileID: 0}
 --- !u!1 &1613465990
 GameObject:
   m_ObjectHideFlags: 0
@@ -1674,11 +1626,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2026886753}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dad1ae14493acfa4f9782734c1b7f7cd, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e10861529d955047a2220378b7ff00d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  gravity: 14
+  speed: 6
+  gravity: 9.8
   jumpHeight: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

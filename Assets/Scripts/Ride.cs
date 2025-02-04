@@ -4,11 +4,12 @@ using UnityEngine.InputSystem;
 public class Ride : MonoBehaviour
 {
     bool inTrigger;
-    MountController controller;
+    MountCharacter mount;
 
+    
     private void Start()
     {
-        controller = GetComponentInParent<MountController>();
+        mount = GetComponentInParent<MountCharacter>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -28,8 +29,7 @@ public class Ride : MonoBehaviour
 
         if (inTrigger && value.isPressed)
         {
-            Controller.Player.gameObject.SetActive(false);
-            controller.Mount();
+            ControllerManager.Player.gameObject.SetActive(false);
             gameObject.SetActive(false);
         }
     }
