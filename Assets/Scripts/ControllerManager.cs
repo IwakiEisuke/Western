@@ -4,29 +4,28 @@ using UnityEngine.InputSystem;
 
 public class ControllerManager : MonoBehaviour
 {
-    [SerializeField] PlayerInput _defaultPlayer;
+    [SerializeField] Character _defaultPlayer;
     [SerializeField] CinemachineCamera _camera;
 
-    public static PlayerInput DefaultPlayer { get; private set; }
-    public static PlayerInput Player { get; private set; }
+    public static Character DefaultPlayer { get; private set; }
+    public static Character Player { get; private set; }
     static new CinemachineCamera camera;
 
     private void Start()
     {
         camera = _camera;
         DefaultPlayer = _defaultPlayer;
-        SetPlayer(_defaultPlayer);
+        SwitchController(_defaultPlayer);
     }
 
-    public static void SetPlayer(PlayerInput p)
+    public static void SwitchController(Character con)
     {
         if (Player)
         {
             Player.enabled = false;
         }
 
-        Player = p;
-        Player.enabled = true;
+        Player = con;
         camera.Follow = Player.transform;
     }
 }

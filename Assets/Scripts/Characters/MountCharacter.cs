@@ -12,7 +12,6 @@ public class MountCharacter : Character, IRidable
     [SerializeField] GameObject _fakePlayer;
 
     Vector3 _velocity;
-    float _verticalVelocity;
     Rigidbody _rigidbody;
 
     bool _isGrounded = false;
@@ -22,8 +21,8 @@ public class MountCharacter : Character, IRidable
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _controller = new MountController(this);
     }
-
 
     /// <summary>
     /// ïœë¨Ç∆ê˘âÒ
@@ -38,13 +37,6 @@ public class MountCharacter : Character, IRidable
         var newVel = moveDir * speed;
         newVel.y = _velocity.y;
         _velocity = newVel;
-        _rigidbody.linearVelocity = _velocity;
-
-        if (_isGrounded)
-        {
-            _velocity.y = 0;
-        }
-        else _velocity.y -= gravity * Time.deltaTime;
     }
 
     /// <summary>
@@ -52,10 +44,20 @@ public class MountCharacter : Character, IRidable
     /// </summary>
     public void Dash()
     {
-
+        print("Dash");
     }
 
-    private void Update()
+    public void Jump()
+    {
+        print("Jump");
+    }
+
+    public void Drift()
+    {
+        print("Drift");
+    }
+
+    public void Interact()
     {
 
     }
@@ -82,5 +84,16 @@ public class MountCharacter : Character, IRidable
     private void OnCollisionExit(Collision collision)
     {
         _isGrounded = false;
+    }
+
+    public override void UpdatePhysics()
+    {
+        if (_isGrounded)
+        {
+            _velocity.y = 0;
+        }
+        else _velocity.y -= gravity * Time.deltaTime;
+
+        _rigidbody.linearVelocity = _velocity;
     }
 }

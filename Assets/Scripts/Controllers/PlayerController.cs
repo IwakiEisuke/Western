@@ -1,18 +1,15 @@
-using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerController : IController
 {
     InputSystem_Actions _actions = new();
-
-    PlayerCharacter _character;
-    Vector2 _input;
+    PlayerCharacter _target;
 
     public PlayerController(PlayerCharacter character)
     {
-        _character = character;
+        _target = character;
         _actions.Player.Enable();
+        _actions.Shoot.Enable();
     }
 
     public void HandleInput()
@@ -20,15 +17,18 @@ public class PlayerController : IController
         // Move
         var move = _actions.Player.Move.ReadValue<Vector2>();
         Debug.Log(move);
-        _character.Move(move);
+        _target.Move(move);
 
         // Jump
-        if (_actions.Player.Jump.IsPressed())
+        if (_actions.Player.Jump.WasPerformedThisFrame())
         {
-            _character.Jump();
+            _target.Jump();
         }
 
         // Ride
-
+        if (_actions.Player.Interact.WasPerformedThisFrame())
+        {
+            Debug.Log("Ride");
+        }
     }
 }

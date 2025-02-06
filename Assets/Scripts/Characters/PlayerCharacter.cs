@@ -10,12 +10,10 @@ public class PlayerCharacter : Character
     CharacterController _characterController;
     Vector3 _velocity;
     bool _isJumping;
-    IController _controller;
 
     private void Start()
     {
         _characterController = GetComponent<CharacterController>();
-        _controller = new PlayerController(this);
     }
 
     public void Move(Vector2 input)
@@ -36,14 +34,27 @@ public class PlayerCharacter : Character
         _velocity.y = Mathf.Sqrt(2 * jumpHeight * gravity);
     }
 
-    void Update()
+    public void Interact()
     {
-        _controller.HandleInput();
+        // ‹ß‚­‚Éƒ}ƒEƒ“ƒg‚ª‚¢‚½‚çæ‚é
+        if (true)
+        {
+            Mount();
+        }
+    }
 
+    private void Mount()
+    {
+        // ‹Ræˆ—
+    }
+
+    public override void UpdatePhysics()
+    {
         _characterController.Move(_velocity * Time.deltaTime);
 
-        if (_characterController.isGrounded)
+        if (_characterController.isGrounded && !_isJumping)
         {
+            _isJumping = false;
             _velocity.y = Mathf.MoveTowards(_velocity.y, 0, Time.deltaTime);
         }
         else _velocity.y -= gravity * Time.deltaTime;

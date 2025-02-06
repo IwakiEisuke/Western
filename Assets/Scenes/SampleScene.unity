@@ -1380,7 +1380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5bbd3d41d41af64695444e9c1e99c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultPlayer: {fileID: 2026886758}
+  _defaultPlayer: {fileID: 2026886760}
   _camera: {fileID: 1060540208}
 --- !u!4 &1780151854
 Transform:
