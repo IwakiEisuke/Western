@@ -11,7 +11,6 @@ public class TargetingSystem : MonoBehaviour
     [SerializeField] LayerMask _layerMask;
     
     readonly Collider[] _hits = new Collider[10];
-    bool isLockOn;
 
     private void GetTarget(float targetRange)
     {
@@ -25,7 +24,7 @@ public class TargetingSystem : MonoBehaviour
 
     public Transform GetLockOnTarget()
     {
-        return _interactTarget;
+        return _lockOnTarget;
     }
 
     public Transform GetInteractTarget()
