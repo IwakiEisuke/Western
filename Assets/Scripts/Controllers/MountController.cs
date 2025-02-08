@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MountController : IController
 {
@@ -9,6 +10,10 @@ public class MountController : IController
     public MountController(MountCharacter mountCharacter)
     {
         _target = mountCharacter;
+        _actions.Mount.Jump.performed += _ => _target.Jump();
+        _actions.Mount.Interact.performed += _ => _target.InteractOrDash();
+        _actions.Mount.Drift.performed += _ => _target.Drift();
+        _actions.Mount.Dismount.performed += _ => _target.Dismount();
     }
 
 
@@ -18,26 +23,6 @@ public class MountController : IController
 
         var move = _actions.Mount.Move.ReadValue<Vector2>();
         _target.Move(move);
-
-        if (_actions.Mount.Jump.WasPerformedThisFrame())
-        {
-            _target.Jump();
-        }
-
-        if (_actions.Mount.Interact.IsPressed())
-        {
-            _target.Dash();
-        }
-
-        if (_actions.Mount.Drift.IsPressed())
-        {
-            _target.Drift();
-        }
-
-        if (_actions.Mount.Dismount.WasPerformedThisFrame())
-        {
-            _target.Dismount();
-        }
     }
 
     public void Enable()

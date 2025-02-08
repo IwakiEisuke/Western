@@ -12,6 +12,7 @@ public class MountCharacter : Character, IRidable
     [SerializeField] float dashDuration = 1;
     [SerializeField] float turnSpeed = 180;
     [SerializeField] float dismountedSpeedReduction = 10;
+    [SerializeField] float canInteractMaxSpeed = 3;
 
     [Header("Others")]
     [SerializeField] float gravity = 9.8f;
@@ -63,7 +64,7 @@ public class MountCharacter : Character, IRidable
     /// <summary>
     /// èPï‡
     /// </summary>
-    async public void Dash()
+    async void Dash()
     {
         print("Mount Dash");
         _currentSpeed = dashSpeed;
@@ -82,9 +83,22 @@ public class MountCharacter : Character, IRidable
         print("Mount Drift");
     }
 
-    public void Interact()
+    private void Interact()
     {
-        print("Mount Interact");
+
+    }
+
+    public void InteractOrDash()
+    {
+        print("Mount InteractOrDash");
+        if (_currentSpeed < canInteractMaxSpeed)
+        {
+            Interact();
+        }
+        else
+        {
+            Dash();
+        }
     }
 
     public void Mount(PlayerCharacter rider)
