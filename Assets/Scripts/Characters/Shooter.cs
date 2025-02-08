@@ -1,6 +1,10 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// 射撃の仮実装クラス。
+/// AIで制御できるよう、入力を分離
+/// </summary>
 public class Shooter : MonoBehaviour
 {
     [SerializeField] GameObject _projectile;
@@ -37,6 +41,6 @@ public class Shooter : MonoBehaviour
     public void LockOn(InputAction.CallbackContext obj)
     {
         Debug.Log("LockOn");
-        _targeting.GetInteractTarget();
+        _targeting.GetLockOnTarget();
     }
 }

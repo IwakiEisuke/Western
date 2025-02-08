@@ -3,47 +3,59 @@ using UnityEngine;
 
 public class TargetingSystem : MonoBehaviour
 {
-    public Transform interactTarget;
-    public bool isLockOn;
-
+    [SerializeField] Transform _interactTarget;
+    [SerializeField] Transform _lockOnTarget;
     [SerializeField] Transform _user;
     [SerializeField] float _lockOnRange = 20;
+    [SerializeField] float _interactRange = 5;
     [SerializeField] LayerMask _layerMask;
     
     readonly Collider[] _hits = new Collider[10];
+    bool isLockOn;
+
+    private void GetTarget(float targetRange)
+    {
+        // Trigger‚ÌEnter,Exit‚Å—v‘fŠÇ—‚µ‚½‚Ù‚¤‚ªŒy‚»‚¤
+        var size = Physics.OverlapSphereNonAlloc(_user.position, targetRange, _hits, _layerMask);
+        var orderByDistance = _hits.Take(size).Select(c => (c.transform, sqDist: (c.transform.position - _user.position).sqrMagnitude)).OrderBy(tp => tp.sqDist);
+
+        _interactTarget = orderByDistance.Where(tp => tp.sqDist < _interactRange * _interactRange).FirstOrDefault().transform;
+        _lockOnTarget = orderByDistance.Where(tp => tp.sqDist < _lockOnRange * _lockOnRange).FirstOrDefault().transform;
+    }
+
+    public Transform GetLockOnTarget()
+    {
+        return _interactTarget;
+    }
 
     public Transform GetInteractTarget()
     {
-        var size = Physics.OverlapSphereNonAlloc(_user.position, _lockOnRange, _hits, _layerMask);
-        var nearest = _hits.Take(size).OrderBy(c => (c.transform.position - _user.position).sqrMagnitude).FirstOrDefault();
-
-        if (nearest != null)
-        {
-            interactTarget = nearest.transform;
-        }
-
-        return interactTarget;
+        return _interactTarget;
     }
 
     private void Update()
     {
-        if (interactTarget != null)
-            if ((_user.position - interactTarget.position).sqrMagnitude > _lockOnRange * _lockOnRange)
-            {
-                interactTarget = null;
-            }
-
-        GetInteractTarget();
+        GetTarget(_lockOnRange);
     }
 
-    public bool TryGetComponentInTarget<T>(out T component)
+    private bool TryGetComponentInTarget<T>(Transform target, out T component)
     {
-        if (interactTarget)
+        if (target == null)
         {
-            return interactTarget.TryGetComponent(out component);
+            component = default;
+            return false;
         }
 
-        component = default;
-        return false;
+        return target.TryGetComponent(out component);
+    }
+
+    public bool TryGetComponentInInteractTarget<T>(out T component)
+    {
+        return TryGetComponentInTarget(_interactTarget, out component);
+    }
+
+    public bool TryGetComponentInLockOnTarget<T>(out T component)
+    {
+        return TryGetComponentInTarget(_lockOnTarget, out component);
     }
 }

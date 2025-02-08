@@ -52,7 +52,7 @@ public class PlayerCharacter : Character
     {
         print("Player Interact");
         // ‹ß‚­‚Éƒ}ƒEƒ“ƒg‚ª‚¢‚½‚çæ‚é
-        if (_targeting.TryGetComponentInTarget<IRidable>(out var ridable))
+        if (_targeting.TryGetComponentInInteractTarget<IRidable>(out var ridable))
         {
             Mount(ridable);
         }
