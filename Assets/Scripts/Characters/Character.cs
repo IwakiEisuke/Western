@@ -9,8 +9,17 @@ public abstract class Character : MonoBehaviour
 
     public void SetController(IController newController)
     {
-        _controller = newController;
+        if (newController == null)
+        {
+            _controller.Disable();
+        }
+        else
+        {
+            _controller = newController;
+            _controller.Enable();
+        }
     }
+
     void Update()
     {
         _controller.HandleInput();

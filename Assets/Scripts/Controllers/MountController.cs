@@ -1,20 +1,21 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class MountController : IController
 {
-    InputSystem_Actions _actions = new();
     MountCharacter _target;
+    InputSystem_Actions _actions = new();
+    bool _enable;
 
-    public MountController(MountCharacter character)
+    public MountController(MountCharacter mountCharacter)
     {
-        _target = character;
-        _actions.Mount.Enable();
-        _actions.Shoot.Enable();
+        _target = mountCharacter;
     }
+
 
     public void HandleInput()
     {
+        if (!_enable) return;
+
         var move = _actions.Mount.Move.ReadValue<Vector2>();
         _target.Move(move);
 
@@ -37,5 +38,17 @@ public class MountController : IController
         {
             _target.Dismount();
         }
+    }
+
+    public void Enable()
+    {
+        _actions.Mount.Enable();
+        _enable = true;
+    }
+
+    public void Disable()
+    {
+        _actions.Mount.Disable();
+        _enable = false;
     }
 }

@@ -2,33 +2,37 @@ using UnityEngine;
 
 public class PlayerController : IController
 {
-    InputSystem_Actions _actions = new();
     PlayerCharacter _target;
+    InputSystem_Actions _actions = new();
+    bool _enable;
 
     public PlayerController(PlayerCharacter character)
     {
         _target = character;
-        _actions.Player.Enable();
-        _actions.Shoot.Enable();
+        _actions.Player.Interact.performed += _ => _target.Interact();
+        _actions.Player.Jump.performed += _ => _target.Jump();
+        _actions.Player.Sprint.performed += _ => _target.Sprint(true);
+        _actions.Player.Sprint.canceled += _ => _target.Sprint(false);
     }
 
     public void HandleInput()
     {
+        if (!_enable) return;
+
         // Move
         var move = _actions.Player.Move.ReadValue<Vector2>();
-        Debug.Log(move);
         _target.Move(move);
+    }
 
-        // Jump
-        if (_actions.Player.Jump.WasPerformedThisFrame())
-        {
-            _target.Jump();
-        }
+    public void Enable()
+    {
+        _actions.Player.Enable();
+        _enable = true;
+    }
 
-        // Ride
-        if (_actions.Player.Interact.WasPerformedThisFrame())
-        {
-            Debug.Log("Ride");
-        }
+    public void Disable()
+    {
+        _actions.Player.Disable();
+        _enable = false;
     }
 }

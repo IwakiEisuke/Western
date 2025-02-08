@@ -448,6 +448,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""24d443fe-6a36-4d70-9282-397047392821"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -630,21 +639,10 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""4912517e-265d-4c4c-95f6-020159ef06aa"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""Jump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""aa1fa0b2-21ba-4f40-85e4-3a89ee93d848"",
-                    ""path"": ""<XRController>/secondaryButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""XR"",
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -663,7 +661,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""d61610ea-ac20-44ad-87d5-a09ce2ae249e"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -674,7 +672,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""23ae9749-dfd7-4f02-b951-a1ddcef12aed"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""path"": ""<Keyboard>/shift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -685,11 +683,22 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""2785a3f4-3d6a-4c70-8679-65bbb12f8b43"",
-                    ""path"": ""<Keyboard>/c"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""Keyboard&Mouse;Gamepad"",
                     ""action"": ""Drift"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0f2c4831-3fdf-47ee-b416-54a4e62f30c8"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dismount"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -706,12 +715,23 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""0f2c4831-3fdf-47ee-b416-54a4e62f30c8"",
-                    ""path"": ""<Keyboard>/shift"",
+                    ""id"": ""93cd19d2-e5d5-4dcc-a84b-03641f917f8d"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Dismount"",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2f7a9b24-87f7-4570-b4bc-9eea66fe592d"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1259,17 +1279,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""8c6d1b25-de12-49eb-ba83-0d4023966bc3"",
-                    ""path"": ""<Gamepad>/buttonWest"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Gamepad"",
-                    ""action"": ""Fire"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""a68835ae-24fd-4a80-b7bb-426f1412157b"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
@@ -1281,44 +1290,22 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""b40139bb-a949-4a27-b267-d7771b0326ae"",
-                    ""path"": ""<Touchscreen>/primaryTouch/tap"",
+                    ""id"": ""9950e3e3-bb58-457c-80d6-f14411e94327"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Touch"",
+                    ""groups"": """",
                     ""action"": ""Fire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""9a477873-b2bd-4f10-84f5-601a7631fa9f"",
-                    ""path"": ""<Joystick>/trigger"",
+                    ""id"": ""e646796f-0928-4228-b7b9-35f9ff029631"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Joystick"",
-                    ""action"": ""Fire"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""7e935d71-5732-4cd4-ae3a-1bb237958c95"",
-                    ""path"": ""<XRController>/{PrimaryAction}"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""XR"",
-                    ""action"": ""Fire"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""3aec0155-d5a5-4d1c-a436-2b2ef00bc1b3"",
-                    ""path"": ""<Keyboard>/enter"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": """",
                     ""action"": ""Fire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -1337,7 +1324,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""ed26d0d0-fca3-4a6e-a03d-1190cdad7b36"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
@@ -1467,6 +1454,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Mount_Drift = m_Mount.FindAction("Drift", throwIfNotFound: true);
         m_Mount_Jump = m_Mount.FindAction("Jump", throwIfNotFound: true);
         m_Mount_Dismount = m_Mount.FindAction("Dismount", throwIfNotFound: true);
+        m_Mount_Dash = m_Mount.FindAction("Dash", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1656,6 +1644,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Mount_Drift;
     private readonly InputAction m_Mount_Jump;
     private readonly InputAction m_Mount_Dismount;
+    private readonly InputAction m_Mount_Dash;
     public struct MountActions
     {
         private @InputSystem_Actions m_Wrapper;
@@ -1666,6 +1655,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         public InputAction @Drift => m_Wrapper.m_Mount_Drift;
         public InputAction @Jump => m_Wrapper.m_Mount_Jump;
         public InputAction @Dismount => m_Wrapper.m_Mount_Dismount;
+        public InputAction @Dash => m_Wrapper.m_Mount_Dash;
         public InputActionMap Get() { return m_Wrapper.m_Mount; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1693,6 +1683,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Dismount.started += instance.OnDismount;
             @Dismount.performed += instance.OnDismount;
             @Dismount.canceled += instance.OnDismount;
+            @Dash.started += instance.OnDash;
+            @Dash.performed += instance.OnDash;
+            @Dash.canceled += instance.OnDash;
         }
 
         private void UnregisterCallbacks(IMountActions instance)
@@ -1715,6 +1708,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Dismount.started -= instance.OnDismount;
             @Dismount.performed -= instance.OnDismount;
             @Dismount.canceled -= instance.OnDismount;
+            @Dash.started -= instance.OnDash;
+            @Dash.performed -= instance.OnDash;
+            @Dash.canceled -= instance.OnDash;
         }
 
         public void RemoveCallbacks(IMountActions instance)
@@ -2013,6 +2009,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         void OnDrift(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnDismount(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
