@@ -12,12 +12,15 @@ public class Shooter : MonoBehaviour
     [SerializeField] float _shootSpeed;
     [SerializeField] TargetingSystem _targeting;
 
+    [SerializeField] Transform _lockOnTarget;
+
     InputSystem_Actions _actions;
 
     private void Awake()
     {
         _actions = new();
         _actions.Shoot.Lockon.performed += LockOn;
+        _actions.Shoot.Lockon.canceled += Unlock;
         _actions.Shoot.Fire.performed += Fire;
     }
 
@@ -41,6 +44,12 @@ public class Shooter : MonoBehaviour
     public void LockOn(InputAction.CallbackContext obj)
     {
         Debug.Log("LockOn");
-        _targeting.GetLockOnTarget();
+        _lockOnTarget = _targeting.GetLockOnTarget();
+    }
+
+    public void Unlock(InputAction.CallbackContext obj)
+    {
+        Debug.Log("Unlock");
+        _lockOnTarget = null;
     }
 }
