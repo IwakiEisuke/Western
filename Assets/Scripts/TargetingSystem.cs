@@ -1,4 +1,5 @@
 using System.Linq;
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class TargetingSystem : MonoBehaviour
@@ -9,7 +10,7 @@ public class TargetingSystem : MonoBehaviour
     [SerializeField] float _lockOnRange = 20;
     [SerializeField] float _interactRange = 5;
     [SerializeField] LayerMask _layerMask;
-    
+
     readonly Collider[] _hits = new Collider[10];
 
     private void GetTarget(float targetRange)
@@ -35,6 +36,11 @@ public class TargetingSystem : MonoBehaviour
     private void Update()
     {
         GetTarget(_lockOnRange);
+
+        if (_lockOnTarget)
+            Debug.DrawLine(transform.position, _lockOnTarget.position, Color.red);
+        if (_interactTarget)
+            Debug.DrawLine(transform.position, _interactTarget.position, Color.green);
     }
 
     private bool TryGetComponentInTarget<T>(Transform target, out T component)

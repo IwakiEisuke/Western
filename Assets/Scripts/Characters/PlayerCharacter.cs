@@ -50,7 +50,8 @@ public class PlayerCharacter : Character
 
     public void Interact()
     {
-        print("Player Interact");
+        print("Player Interact " + (_targeting.GetInteractTarget() != null ? _targeting.GetInteractTarget() : "[null]"));
+
         // ‹ß‚­‚Éƒ}ƒEƒ“ƒg‚ª‚¢‚½‚çæ‚é
         if (_targeting.TryGetComponentInInteractTarget<IRidable>(out var ridable))
         {

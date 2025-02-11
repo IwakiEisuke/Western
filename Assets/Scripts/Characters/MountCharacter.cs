@@ -45,7 +45,7 @@ public class MountCharacter : Character, IRidable
     {
         if (!ApplicationFocusManager.IsFocus) input = Vector3.zero;
 
-        transform.forward = Quaternion.AngleAxis(input.x * turnSpeed * Time.deltaTime, Vector3.up) * transform.forward;
+        _rigidbody.rotation *= (Quaternion.AngleAxis(input.x * turnSpeed * Time.deltaTime, Vector3.up));
 
         if (!_isDash) // ダッシュ中は速度固定
         {

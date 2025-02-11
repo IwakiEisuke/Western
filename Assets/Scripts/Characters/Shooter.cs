@@ -1,3 +1,5 @@
+using System.Linq;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,12 +11,23 @@ public class Shooter : MonoBehaviour
 {
     [SerializeField] GameObject _projectile;
     [SerializeField] Transform _muzzle;
+    [SerializeField] Transform _gun;
     [SerializeField] float _shootSpeed;
     [SerializeField] TargetingSystem _targeting;
 
     [SerializeField] Transform _lockOnTarget;
+    [SerializeField] CinemachineTargetGroup _targetGroup;
+    [SerializeField] CinemachineCamera _camera;
+
+    [SerializeField] float _lockOnSpeed = 10;
+    [SerializeField] float _lockOnWeight = 4;
+    [SerializeField] Vector3 _lockOnOffset;
+
+    [SerializeField] CinemachineCamera _lockOnCamera;
+    [SerializeField] ShoulderFollow _shoulderFollow;
 
     InputSystem_Actions _actions;
+    bool _isLockOn;
 
     private void Awake()
     {
@@ -44,12 +57,36 @@ public class Shooter : MonoBehaviour
     public void LockOn(InputAction.CallbackContext obj)
     {
         Debug.Log("LockOn");
+        
         _lockOnTarget = _targeting.GetLockOnTarget();
+        if (_lockOnTarget)
+        {
+            _isLockOn = true;
+            _targetGroup.Targets.Last().Object = _lockOnTarget;
+        }
+
+        _lockOnCamera.Target.LookAtTarget = _lockOnTarget;
+        _shoulderFollow.lookAt = _lockOnTarget;
+        _lockOnCamera.Priority.Value = 1;
     }
 
     public void Unlock(InputAction.CallbackContext obj)
     {
         Debug.Log("Unlock");
-        _lockOnTarget = null;
+        _isLockOn = false;
+        _gun.localRotation = Quaternion.identity;
+
+        _lockOnCamera.Priority.Value = -1;
+        _camera.ForceCameraPosition(_lockOnCamera.transform.position, _lockOnCamera.transform.rotation);
+    }
+
+    private void Update()
+    {
+        if (_isLockOn)
+        {
+            _gun.LookAt(_lockOnTarget);
+            //var forward = Vector3.RotateTowards(_camera.transform.forward, _lockOnTarget.position - (_camera.transform.position + _lockOnOffset), Time.deltaTime, Time.deltaTime);
+            //_camera.ForceCameraPosition(transform.position + -forward * _orbitalFollow.Radius, Quaternion.LookRotation(forward));
+        }
     }
 }
