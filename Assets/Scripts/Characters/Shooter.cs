@@ -16,7 +16,6 @@ public class Shooter : MonoBehaviour
     [SerializeField] TargetingSystem _targeting;
 
     [SerializeField] Transform _lockOnTarget;
-    [SerializeField] CinemachineTargetGroup _targetGroup;
     [SerializeField] CinemachineCamera _camera;
 
     [SerializeField] float _lockOnSpeed = 10;
@@ -62,7 +61,6 @@ public class Shooter : MonoBehaviour
         if (_lockOnTarget)
         {
             _isLockOn = true;
-            _targetGroup.Targets.Last().Object = _lockOnTarget;
         }
 
         _lockOnCamera.Target.LookAtTarget = _lockOnTarget;

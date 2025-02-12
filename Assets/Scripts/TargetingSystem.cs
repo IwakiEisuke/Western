@@ -13,14 +13,24 @@ public class TargetingSystem : MonoBehaviour
 
     readonly Collider[] _hits = new Collider[10];
 
+    //private void GetTarget(float targetRange)
+    //{
+    //    // Trigger‚ÌEnter,Exit‚Å—v‘fŠÇ—‚µ‚½‚Ù‚¤‚ªŒy‚»‚¤
+    //    var size = Physics.OverlapSphereNonAlloc(_user.position, targetRange, _hits, _layerMask);
+    //    var orderByDistance = _hits.Take(size).Select(c => (c.transform, sqDist: (c.transform.position - _user.position).sqrMagnitude)).OrderBy(tp => tp.sqDist);
+
+    //    _interactTarget = orderByDistance.Where(tp => tp.sqDist < _interactRange * _interactRange).FirstOrDefault().transform;
+    //    _lockOnTarget = orderByDistance.Where(tp => tp.sqDist < _lockOnRange * _lockOnRange).FirstOrDefault().transform;
+    //}
+    
     private void GetTarget(float targetRange)
     {
         // Trigger‚ÌEnter,Exit‚Å—v‘fŠÇ—‚µ‚½‚Ù‚¤‚ªŒy‚»‚¤
         var size = Physics.OverlapSphereNonAlloc(_user.position, targetRange, _hits, _layerMask);
-        var orderByDistance = _hits.Take(size).Select(c => (c.transform, sqDist: (c.transform.position - _user.position).sqrMagnitude)).OrderBy(tp => tp.sqDist);
+        var orderByDistance = _hits.Take(size).Select(c => (c.transform, angle: Vector3.Angle(Camera.main.transform.forward, (c.transform.position - Camera.main.transform.position).normalized))).OrderBy(tp => tp.angle).ToArray();
 
-        _interactTarget = orderByDistance.Where(tp => tp.sqDist < _interactRange * _interactRange).FirstOrDefault().transform;
-        _lockOnTarget = orderByDistance.Where(tp => tp.sqDist < _lockOnRange * _lockOnRange).FirstOrDefault().transform;
+        _interactTarget = orderByDistance.FirstOrDefault().transform;
+        _lockOnTarget = orderByDistance.FirstOrDefault().transform;
     }
 
     public Transform GetLockOnTarget()
