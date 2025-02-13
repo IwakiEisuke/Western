@@ -24,8 +24,6 @@ public class Shooter : MonoBehaviour
 
     [SerializeField] CinemachineCamera _lockOnCamera;
     [SerializeField] Transform _lockOnCameraLookAt;
-    [SerializeField] float _tt = 10;
-    Transform _prevLockOnTarget;
 
     InputSystem_Actions _actions;
     bool _isLockOn;
@@ -103,9 +101,8 @@ public class Shooter : MonoBehaviour
             }
 
             _gun.LookAt(_lockOnTarget);
-            _lockOnCameraLookAt.position = Vector3.Lerp(_lockOnCameraLookAt.position, _lockOnTarget.position, _tt * Time.deltaTime);
-            //var forward = Vector3.RotateTowards(_camera.transform.forward, _lockOnTarget.position - (_camera.transform.position + _lockOnOffset), Time.deltaTime, Time.deltaTime);
-            //_camera.ForceCameraPosition(transform.position + -forward * _orbitalFollow.Radius, Quaternion.LookRotation(forward));
+
+            _lockOnCameraLookAt.position = Vector3.Lerp(_lockOnCameraLookAt.position, _lockOnTarget.position, _lockOnSpeed * Time.deltaTime);
         }
     }
 }

@@ -14,11 +14,20 @@ public class TargetingSystem : MonoBehaviour
 
     private void GetTarget(float targetRange)
     {
-        // Trigger‚ÌEnter,Exit‚Å—v‘fŠÇ—‚µ‚½‚Ù‚¤‚ªŒy‚»‚¤
+        // Trigger‚ÌEnter,Exit‚ÅŠÇ—‚Æ‚©E‰æ–Ê‚É‰f‚Á‚Ä‚é”»’è
         var size = Physics.OverlapSphereNonAlloc(_user.position, targetRange, _hits, _layerMask);
-        var orderByAngle = _hits.Take(size).Select(c => (c.transform, angle: Vector3.Angle(Camera.main.transform.forward, (c.transform.position - Camera.main.transform.position).normalized))).OrderBy(tp => tp.angle).ToArray();
 
-        _interactTarget = orderByAngle.FirstOrDefault().transform;
+        var orderByAngle = _hits
+            .Take(size)
+            .Select(c =>
+            (
+            c.transform,
+            angle: Vector3.Angle(Camera.main.transform.forward, c.transform.position - Camera.main.transform.position),
+            range: Vector3.Distance(Camera.main.transform.position, c.transform.position)
+            ))
+            .OrderBy(tp => tp.angle).ToArray();
+
+        _interactTarget = orderByAngle.Where(x => x.range < _interactRange).FirstOrDefault().transform;
         _lockOnTarget = orderByAngle.FirstOrDefault().transform;
     }
 
