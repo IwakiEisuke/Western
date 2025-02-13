@@ -1060,7 +1060,7 @@ GameObject:
   m_Component:
   - component: {fileID: 648374716}
   m_Layer: 0
-  m_Name: lockonTarget
+  m_Name: LockOnCameraTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1192,7 +1192,6 @@ MonoBehaviour:
   _lockOnOffset: {x: 2, y: 2, z: 0}
   _lockOnCamera: {fileID: 1791946453}
   _lockOnCameraLookAt: {fileID: 648374716}
-  _tt: 3
 --- !u!4 &853978257
 Transform:
   m_ObjectHideFlags: 0
@@ -1628,7 +1627,7 @@ GameObject:
   - component: {fileID: 1328371560}
   - component: {fileID: 1328371561}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2285,7 +2284,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2026886753}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 

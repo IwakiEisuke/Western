@@ -23,7 +23,7 @@ public class TargetingSystem : MonoBehaviour
             (
             c.transform,
             angle: Vector3.Angle(Camera.main.transform.forward, c.transform.position - Camera.main.transform.position),
-            range: Vector3.Distance(Camera.main.transform.position, c.transform.position)
+            range: Vector3.Distance(_user.transform.position, c.transform.position)
             ))
             .OrderBy(tp => tp.angle).ToArray();
 
