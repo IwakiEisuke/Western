@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerCharacter : Character
@@ -14,25 +15,20 @@ public class PlayerCharacter : Character
     CharacterController _characterController;
     Vector3 _velocity;
     bool _isJumping;
+    Vector2 _input;
 
     private void Start()
     {
         _characterController = GetComponent<CharacterController>();
-        SetController(new PlayerController(this));
+        _controller = new PlayerController(this);
+        _controller.Enable();
         _speed = walkSpeed;
     }
 
     public void Move(Vector2 input)
     {
-        if (!ApplicationFocusManager.IsFocus) input = Vector3.zero;
-
-        var cameraLook = Quaternion.AngleAxis(Camera.main.transform.eulerAngles.y, Vector3.up);
-        var moveDir = cameraLook * new Vector3(input.x, 0, input.y);
-        if (moveDir.sqrMagnitude > 0) transform.forward = moveDir;
-
-        var newVel = moveDir * _speed;
-        newVel.y = _velocity.y;
-        _velocity = newVel;
+        if (!ApplicationFocusManager.IsFocus) _input = Vector2.zero;
+        else _input = input;
     }
 
     public void Sprint(bool enable)
@@ -44,8 +40,11 @@ public class PlayerCharacter : Character
     public void Jump()
     {
         print("Player Jump");
-        _isJumping = true;
-        _velocity.y = Mathf.Sqrt(2 * jumpHeight * gravity);
+        if (!_isJumping)
+        {
+            _isJumping = true;
+            _velocity.y = Mathf.Sqrt(2 * jumpHeight * gravity);
+        }
     }
 
     public void Interact()
@@ -78,13 +77,25 @@ public class PlayerCharacter : Character
 
     public override void UpdatePhysics()
     {
+        // inputから速度を決定する
+        var cameraLook = Quaternion.AngleAxis(Camera.main.transform.eulerAngles.y, Vector3.up);
+        var moveDir = cameraLook * new Vector3(_input.x, 0, _input.y);
+        if (moveDir.sqrMagnitude > 0) transform.forward = moveDir;
+
+        var newVel = moveDir * _speed;
+        newVel.y = _velocity.y;
+        _velocity = newVel;
+
+        // 速度に基づいて移動
         _characterController.Move(_velocity * Time.deltaTime);
 
-        if (_characterController.isGrounded && !_isJumping)
+        // 接地判定
+        if (_characterController.isGrounded)
         {
             _isJumping = false;
             _velocity.y = Mathf.MoveTowards(_velocity.y, 0, Time.deltaTime);
         }
+        // 重力加速
         else _velocity.y -= gravity * Time.deltaTime;
     }
 }

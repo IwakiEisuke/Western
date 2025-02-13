@@ -109,6 +109,7 @@ public class MountCharacter : Character, IRidable
         _controller.Enable();
         _rider.transform.position = _PlayerPos.position;
         _rider.transform.parent = transform;
+        gameObject.layer = 0;
         _onMountEvent.Invoke();
     }
 
@@ -120,6 +121,7 @@ public class MountCharacter : Character, IRidable
         _rider.Dismount();
         _rider = null;
         this.SetController(null);
+        gameObject.layer = 7;
         _onDismountEvent.Invoke();
     }
 

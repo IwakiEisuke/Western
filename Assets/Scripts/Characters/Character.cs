@@ -11,18 +11,18 @@ public abstract class Character : MonoBehaviour
     {
         if (newController == null)
         {
-            _controller.Disable();
+            _controller?.Disable();
         }
         else
         {
             _controller = newController;
-            _controller.Enable();
+            _controller?.Enable();
         }
     }
 
     void Update()
     {
-        _controller.HandleInput();
+        _controller?.HandleInput();
         UpdatePhysics();
     }
 

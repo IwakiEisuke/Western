@@ -23,7 +23,9 @@ public class Shooter : MonoBehaviour
     [SerializeField] Vector3 _lockOnOffset;
 
     [SerializeField] CinemachineCamera _lockOnCamera;
-    [SerializeField] ShoulderFollow _shoulderFollow;
+    [SerializeField] Transform _lockOnCameraLookAt;
+    [SerializeField] float _tt = 10;
+    Transform _prevLockOnTarget;
 
     InputSystem_Actions _actions;
     bool _isLockOn;
@@ -55,17 +57,24 @@ public class Shooter : MonoBehaviour
 
     public void LockOn(InputAction.CallbackContext obj)
     {
+        if (LockOn())
+        {
+            _lockOnCameraLookAt.position = _lockOnTarget.position;
+        }
+    }
+
+    bool LockOn()
+    {
         Debug.Log("LockOn");
-        
+
         _lockOnTarget = _targeting.GetLockOnTarget();
         if (_lockOnTarget)
         {
             _isLockOn = true;
+            _lockOnCamera.Priority.Value = 1;
+            return true;
         }
-
-        _lockOnCamera.Target.LookAtTarget = _lockOnTarget;
-        _shoulderFollow.lookAt = _lockOnTarget;
-        _lockOnCamera.Priority.Value = 1;
+        return false;
     }
 
     public void Unlock(InputAction.CallbackContext obj)
@@ -82,7 +91,19 @@ public class Shooter : MonoBehaviour
     {
         if (_isLockOn)
         {
+            if (!_lockOnTarget.gameObject.activeInHierarchy)
+            {
+                LockOn();
+                
+                if (!_lockOnTarget)
+                {
+                    _isLockOn = false;
+                    return;
+                }
+            }
+
             _gun.LookAt(_lockOnTarget);
+            _lockOnCameraLookAt.position = Vector3.Lerp(_lockOnCameraLookAt.position, _lockOnTarget.position, _tt * Time.deltaTime);
             //var forward = Vector3.RotateTowards(_camera.transform.forward, _lockOnTarget.position - (_camera.transform.position + _lockOnOffset), Time.deltaTime, Time.deltaTime);
             //_camera.ForceCameraPosition(transform.position + -forward * _orbitalFollow.Radius, Quaternion.LookRotation(forward));
         }

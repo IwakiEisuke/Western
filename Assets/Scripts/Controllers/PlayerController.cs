@@ -13,15 +13,13 @@ public class PlayerController : IController
         _actions.Player.Jump.performed += _ => _target.Jump();
         _actions.Player.Sprint.performed += _ => _target.Sprint(true);
         _actions.Player.Sprint.canceled += _ => _target.Sprint(false);
+        _actions.Player.Move.performed += c => _target.Move(c.ReadValue<Vector2>());
+        _actions.Player.Move.canceled += _ => _target.Move(Vector2.zero);
     }
 
     public void HandleInput()
     {
-        if (!_enable) return;
-
-        // Move
-        var move = _actions.Player.Move.ReadValue<Vector2>();
-        _target.Move(move);
+        
     }
 
     public void Enable()
